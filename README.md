@@ -1,16 +1,16 @@
 # piesAndBars
-An application to graphically represent the grade distribution in IIT Bhubaneswar over the past years.</br>
-To use, first clone the project then run **pip3 install -r requirements.txt**</br>
-Use command **export FLASK_APP=application.py** to set the environment variable and then use **flask run**</br>
+An application to graphically represent the grade distribution in IIT Bhubaneswar over the past years. 
+To use, first clone the project then run **pip3 install -r requirements.txt** 
+Use command **export FLASK_APP=application.py** to set the environment variable and then use **flask run** 
 
 **URLs:**</br>
-*localhost:5000/cgpa* - Displays the CGPA distribution,batchwise. Required parameter: **year** </br>
-Example: localhost/cgpa?year=16</br>
-<p align="center">
+*localhost:5000/cgpa* - Displays the CGPA distribution,batchwise. Required parameter: **year** 
+Example: localhost/cgpa?year=16 
+<p align="center"> 
 <img src="https://user-images.githubusercontent.com/25523604/56133124-531c8300-5fa9-11e9-82c0-3d4279363629.png"></img>
 </p>
 
-*localhost:5000/cgpa/branch* - Displays the CGPA distribution,batchwise. Required parameter: **year**, **branch** </br>
+*localhost:5000/cgpa/branch* - Displays the CGPA distribution,batchwise. Required parameter: **year**, **branch** 
 Example: localhost/cgpa/branch?year=16&branch=CS</br>
 <p align="center">
 <img src="https://user-images.githubusercontent.com/25523604/56133646-87447380-5faa-11e9-802f-8aaed827a12c.png"></img>
