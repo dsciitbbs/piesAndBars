@@ -33,3 +33,11 @@ Example: localhost/subject?sub=CE1P001</br>
 <p align="center">
 <img src="https://user-images.githubusercontent.com/25523604/56133997-4862ed80-5fab-11e9-94c5-5e36623fa6d8.png"></img>
 </p>
+
+**TODO**: 
+* Handle all TODO items inside code
+* Add CSS to the site under static folder to revamp front-end
+* Change homepage to have a form so that users can directly go to a graph they use to see and they don't have to type the URL manually. Something like the video shown <a href="https://github.com/metakgp/Kronos">here</a>
+* Give more configuration options to charts, such as bar charts, line charts, scatter plot, pie charts etc. rather than only histograms.
+* Collect missing data, such as for batch 15-16
+* Currently, highest grade getter is shown on top as a *flash*. Change it to a more presentable option.
