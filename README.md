@@ -1,7 +1,7 @@
 # piesAndBars
-An application to graphically represent the grade distribution in IIT Bhubaneswar over the past years. 
-To use, first clone the project then run **pip3 install -r requirements.txt** 
-Use command **export FLASK_APP=application.py** to set the environment variable and then use **flask run** 
+An application to graphically represent the grade distribution in IIT Bhubaneswar over the past years.  
+To use, first clone the project then run **pip3 install -r requirements.txt**  
+Use command **export FLASK_APP=application.py** to set the environment variable and then use **flask run**  
 
 **URLs:**</br>
 *localhost:5000/cgpa* - Displays the CGPA distribution,batchwise. Required parameter: **year** 
