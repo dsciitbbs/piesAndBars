@@ -7,6 +7,7 @@ from graphIt import get_CGPA
 from SGPA import get_SGPA
 from subject import get_subject
 import numpy as np
+from forms import FirstForm
 
 app = Flask(__name__)
 
@@ -25,38 +26,83 @@ def apology(message, code=400):
 		return s
 	return render_template("apology.html", top=code, bottom=escape(message)), code
 
-# Ensure responses aren't cached
-@app.after_request
-def after_request(response):
-	response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
-	response.headers["Expires"] = 0
-	response.headers["Pragma"] = "no-cache"
-	return response
+def getSGPA_allBranch(year = 2016):
+	val = get_SGPA(year)
+	scripts = []
+	divs = []
+	k = 0
+	for value in val:
+		if k == len(val)-3:
+			break
+		p = figure(plot_width=400, plot_height=400, sizing_mode='scale_width')
+		#p.y_range.end=60
+		p.xaxis.axis_label='Semester '+str(int(k+1))
+		temp_SGPA=[]
+		temp_roll=[]
+		temp_name=[]
+		for idx,i in enumerate(val[len(val)-2]):
+			temp_SGPA.append(value[idx])
+			temp_roll.append(val[len(val)-2][idx])
+			temp_name.append(val[len(val)-1][idx])
+		if not temp_SGPA:
+			values = []
+			return values, val
+		m=max(temp_SGPA)
+		t=[i for i, j in enumerate(temp_SGPA) if j == m]
+		l=[i for i in range(0,len(temp_SGPA))]
+		hist, edges = np.histogram(temp_SGPA, density=True, bins=10, weights=l)
+		hist=[int(i*100) for i in hist]
+		p.quad(top=hist, bottom=0,
+			   left=edges[:-1], right=edges[1:], fill_color="#036564", line_color="#033649")
+		script, div = components(p)
+		scripts.append(script)
+		divs.append(div)
+		k=k+1
+	values = list(zip(scripts, divs))
+	return values, val
 
-
-app.config["SESSION_FILE_DIR"] = mkdtemp()
-app.config["SESSION_PERMANENT"] = False
-app.config["SESSION_TYPE"] = "filesystem"
-Session(app)
-
-
-@app.route("/")
-def index():
-	"""TODO-Change to a meaningful index page,preferably one with forms so that user can easily go to a graph"""
-	return apology("Sorry")
-
-@app.route("/cgpa/branch",methods=["GET"])
-def cgpa_branchwise():
-	"""TODO: Implement error checking, display suitable messages if:
-	a)Some argument is missing in the get request
-	b)  Invalid year/branch combo. Only 14,16,17 allowed as year and CS,EC,EE,MM,CE,ME as branch; EC not allowed for 14 and like so"""
-	year=request.args.get('year')
-	branch=request.args.get('branch')
+def getCGPA_allBranch(year=2016):
+	val = get_CGPA(year)
+	scripts = []
+	divs = []
+	k = 0
+	for value in val:
+		if k == len(val)-3:
+			break
+		p = figure(plot_width=400, plot_height=400, sizing_mode='scale_width')
+		#p.y_range.end=60
+		p.xaxis.axis_label='Semester '+str(int(k+1))
+		temp_CGPA=[]
+		temp_roll=[]
+		temp_name=[]
+		for idx,i in enumerate(val[len(val)-2]):
+			temp_CGPA.append(value[idx])
+			temp_roll.append(val[len(val)-2][idx])
+			temp_name.append(val[len(val)-1][idx])
+		if not temp_CGPA:
+			values = []
+			return values, val
+		m=max(temp_CGPA)
+		t=[i for i, j in enumerate(temp_CGPA) if j == m]
+		l=[i for i in range(0,len(temp_CGPA))]
+		hist, edges = np.histogram(temp_CGPA, density=True, bins=10, weights=l)
+		hist=[int(i*100) for i in hist]
+		p.quad(top=hist, bottom=0,
+			   left=edges[:-1], right=edges[1:], fill_color="#036564", line_color="#033649")
+		script, div = components(p)
+		scripts.append(script)
+		divs.append(div)
+		k=k+1
+	values = list(zip(scripts, divs))
+	return values, val
+	
+def getCGPA_branchwiseValues(year=2016, branch = "EC"):
 	val=get_CGPA(year)
 	scripts=[]
 	divs=[]
 	k=0
 	highs=[]
+	print(len(val))
 	for value in val:
 		if k==len(val)-3:
 			break
@@ -70,6 +116,10 @@ def cgpa_branchwise():
 				temp_CGPA.append(value[idx])
 				temp_roll.append(val[len(val)-2][idx])
 				temp_name.append(val[len(val)-1][idx])
+		if not temp_CGPA:
+			values = []
+			highs=[]
+			return values, highs
 		m=max(temp_CGPA)
 		t=[i for i, j in enumerate(temp_CGPA) if j == m]
 		for v in t:
@@ -84,74 +134,9 @@ def cgpa_branchwise():
 		divs.append(div)
 		k=k+1
 	values = list(zip(scripts, divs))
-	flash (' '.join(highs))
-	return render_template("cgpa.html", values=values)
+	return values, highs
 
-@app.route("/cgpa",methods=["GET"])
-def cgpa_dist():
-	"""TODO: Implement error checking, display suitable messages if:
-	a)Some argument is missing in the get request
-	b)Invalid year. Only 14,16,17 allowed as year."""
-	year=request.args.get('year')
-	val = get_CGPA(year)
-	scripts = []
-	divs = []
-	i = 0
-	for value in val:
-		if i == len(val)-3:
-			break
-		p = figure(plot_width=400, plot_height=400, sizing_mode='scale_width')
-		#p.y_range.end=60
-		p.xaxis.axis_label='Semester '+str(int(i+1))
-		l=[i for i in range(0,len(value))]
-		hist, edges = np.histogram(value, density=True, bins=10, weights=l)
-		hist=[int(i*100) for i in hist]
-		p.quad(top=hist, bottom=0,
-			   left=edges[:-1], right=edges[1:], fill_color="#036564", line_color="#033649")
-		script, div = components(p)
-		scripts.append(script)
-		divs.append(div)
-		i=i+1
-	values = list(zip(scripts, divs))
-	flash (' '.join(val[len(val)-3]))
-	return render_template("cgpa.html", values=values)
-
-@app.route("/sgpa",methods=["GET"])
-def sgpa_dist():
-	"""TODO: Implement error checking, display suitable messages if:
-	a)Some argument is missing in the get request
-	b)  Invalid year. Only 14,15,17 allowed as year"""
-	year=request.args.get('year')
-	val = get_SGPA(year)
-	scripts = []
-	divs = []
-	i = 0
-	for value in val:
-		if i == len(val)-3:
-			break
-		p = figure(plot_width=400, plot_height=400, sizing_mode='scale_width')
-		#p.y_range.end=60
-		p.xaxis.axis_label='Semester '+str(int(i+1))
-		l=[i for i in range(0,len(value))]
-		hist, edges = np.histogram(value, density=True, bins=10, weights=l)
-		hist=[int(i*100) for i in hist]
-		p.quad(top=hist, bottom=0,
-			   left=edges[:-1], right=edges[1:], fill_color="#036564", line_color="#033649")
-		script, div = components(p)
-		scripts.append(script)
-		divs.append(div)
-		i=i+1
-	values = list(zip(scripts, divs))
-	flash (' '.join(val[len(val)-3]))
-	return render_template("sgpa.html", values=values)
-
-@app.route("/sgpa/branch",methods=["GET"])
-def sgpa_branchwise():
-	"""TODO: Implement error checking, display suitable messages if:
-	a)Some argument is missing in the get request
-	b)  Invalid year/branch combo. Only 14,16,17 allowed as year and CS,EC,EE,MM,CE,ME as branch; EC not allowed for 14 and like so"""
-	year=request.args.get('year')
-	branch=request.args.get('branch')
+def getSGPA_branchwiseValues(year=2016, branch="EC"):
 	val=get_SGPA(year)
 	scripts=[]
 	divs=[]
@@ -184,6 +169,89 @@ def sgpa_branchwise():
 		divs.append(div)
 		k=k+1
 	values = list(zip(scripts, divs))
+	return values, highs
+
+
+# Ensure responses aren't cached
+@app.after_request
+def after_request(response):
+	response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+	response.headers["Expires"] = 0
+	response.headers["Pragma"] = "no-cache"
+	return response
+
+
+app.config["SESSION_FILE_DIR"] = mkdtemp()
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
+app.config['SECRET_KEY'] = 'you-will-never-guess'
+Session(app)
+
+
+@app.route("/", methods=['GET', 'POST'])
+def index():
+	form = FirstForm()
+
+	if request.method == 'POST':
+		if form.validate() == False:
+			flash('All fields are necessary')
+			return render_template('firstform.html', form=form)
+		else:
+			yearentry = form.year.data
+			branchentry = form.branch.data
+			formatentry = form.branch.data
+			if yearentry == "14" and branchentry =="EC":
+				print("ECE 14");
+				flash('ECE branch does not exist in year 14')
+				return render_template('firstform.html',form = form)
+			elif branchentry == "ALL":
+				if formatentry == "C":
+					values,val = getCGPA_allBranch(yearentry)
+					flash (' '.join(val[len(val)-3]))
+					return render_template("cgpa.html", values=values)
+				else:
+					values,val = getSGPA_allBranch(yearentry)
+					flash (' '.join(val[len(val)-3]))
+					return render_template("sgpa.html",values=values)
+			else:
+				if formatentry == "S":
+					values, highs = getSGPA_branchwiseValues(yearentry,branchentry)
+					if not values or not highs:
+						flash('Could not find any entry that met your specification')
+						return render_template("sgpa.html", values=values)
+					flash (' '.join(highs))
+					return render_template("sgpa.html", values=values)
+				else:
+					values, highs = getCGPA_branchwiseValues(yearentry, branchentry)
+					if not values or not highs:
+						flash('Could not find any entry that met your specification')
+						return render_template("cgpa.html", values=values)
+					flash (' '.join(highs))
+					return render_template("cgpa.html", values=values)
+	elif request.method == 'GET':
+		return render_template('firstform.html', form = form)
+
+@app.route("/cgpa/branch",methods=["GET"])
+def cgpa_branchwise(year=16, branch="EC"):
+	values, highs = getCGPA_branchwiseValues(year, branch)
+	flash (' '.join(highs))
+	return render_template("cgpa.html", values=values)
+
+@app.route("/cgpa",methods=["GET"])
+def cgpa_dist():
+	values = getCGPA_allBranch(year =16)
+	flash (' '.join(val[len(val)-3]))
+	return render_template("cgpa.html", values=values)
+
+@app.route("/sgpa",methods=["GET"])
+def sgpa_dist():
+	values,val = getSGPA_allBranch(year = 2016)
+	flash (' '.join(val[len(val)-3]))
+	return render_template("sgpa.html", values=values)
+
+@app.route("/sgpa/branch",methods=["GET"])
+def sgpa_branchwise(year = 16, branch="EC"):
+	values,highs = getSGPA_branchwiseValues(year,branch)
 	flash (' '.join(highs))
 	return render_template("sgpa.html", values=values)
 
@@ -192,7 +260,7 @@ def subject():
 	"""TODO: Implement error checking, display suitable messages if:
 	a)Some argument is missing in the get request
 	b)Invalid subcode"""
-	sub=request.args.get('sub')
+	sub="ID1T001"
 	scripts=[]
 	divs=[]
 	x=get_subject(sub)

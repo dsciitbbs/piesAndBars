@@ -320,7 +320,6 @@ def get_CGPA(year):
 		t=[i for i, j in enumerate(s5) if j == m]
 		for val in t:
 			highs.append("Semester 8: "+name[val]+","+roll[val]+","+s8[val])
-	print(s1)
 	#Strip text, only store number
 	s1=[float(v[5:]) for v in s1]
 	s2=[float(v[5:]) for v in s2]
