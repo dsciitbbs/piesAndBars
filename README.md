@@ -5,7 +5,7 @@ Use command **export FLASK_APP=application.py** to set the environment variable 
 
 **URLs:**</br>
 
-*localhost:5000/: - Form interface for the various result distributions available  
+*localhost:5000/*: - Form interface for the various result distributions available  
 
 *localhost:5000/cgpa* - Displays the CGPA distribution,batchwise. Required parameter: **year** </br>
 Example: localhost/cgpa?year=16</br>
