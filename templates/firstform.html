@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <ul class=flashes>
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+    {% endwith %}
+
+
+    <h2 style="text-align: center;">Pies&Bars</h2>
+    <form action="" method="post" novalidate>
+        <fieldset>
+            <legend>Pies&Bars</legend>
+        {{ form.hidden_tag() }}
+
+        <div style= font-size:20px; font-weight:bold; margin-left:150px;>
+        <p>
+            Choose a year <br>
+            {{ form.year }}<br>
+            {% for error in form.year.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            Choose a branch <br>
+            {{ form.branch }}<br>
+            {% for error in form.branch.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            What would you like to visualise?<br>
+            {{ form.format }}<br>
+            {% for error in form.format.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>        
+
+        <p>{{ form.submit() }}</p>
+    </div>
+    </fieldset>
+    </form>
+</body>
+</html>
