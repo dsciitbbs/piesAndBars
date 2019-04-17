@@ -26,7 +26,7 @@ def apology(message, code=400):
 		return s
 	return render_template("apology.html", top=code, bottom=escape(message)), code
 
-def getSGPA_allBranch(year = 2016):
+def getSGPA_allBranch(year = 16):
 	val = get_SGPA(year)
 	scripts = []
 	divs = []
@@ -61,7 +61,7 @@ def getSGPA_allBranch(year = 2016):
 	values = list(zip(scripts, divs))
 	return values, val
 
-def getCGPA_allBranch(year=2016):
+def getCGPA_allBranch(year=16):
 	val = get_CGPA(year)
 	scripts = []
 	divs = []
@@ -75,6 +75,7 @@ def getCGPA_allBranch(year=2016):
 		temp_CGPA=[]
 		temp_roll=[]
 		temp_name=[]
+		highs=[]
 		for idx,i in enumerate(val[len(val)-2]):
 			temp_CGPA.append(value[idx])
 			temp_roll.append(val[len(val)-2][idx])
@@ -84,6 +85,8 @@ def getCGPA_allBranch(year=2016):
 			return values, val
 		m=max(temp_CGPA)
 		t=[i for i, j in enumerate(temp_CGPA) if j == m]
+		for x in t:
+			highs.append((temp_name[x],temp_roll[x],temp_CGPA[x]))
 		l=[i for i in range(0,len(temp_CGPA))]
 		hist, edges = np.histogram(temp_CGPA, density=True, bins=10, weights=l)
 		hist=[int(i*100) for i in hist]
@@ -94,9 +97,9 @@ def getCGPA_allBranch(year=2016):
 		divs.append(div)
 		k=k+1
 	values = list(zip(scripts, divs))
-	return values, val
+	return values, val, highs
 	
-def getCGPA_branchwiseValues(year=2016, branch = "EC"):
+def getCGPA_branchwiseValues(year=16, branch = "EC"):
 	val=get_CGPA(year)
 	scripts=[]
 	divs=[]
@@ -136,7 +139,7 @@ def getCGPA_branchwiseValues(year=2016, branch = "EC"):
 	values = list(zip(scripts, divs))
 	return values, highs
 
-def getSGPA_branchwiseValues(year=2016, branch="EC"):
+def getSGPA_branchwiseValues(year=16, branch="EC"):
 	val=get_SGPA(year)
 	scripts=[]
 	divs=[]
@@ -206,7 +209,7 @@ def index():
 				return render_template('firstform.html',form = form)
 			elif branchentry == "ALL":
 				if formatentry == "C":
-					values,val = getCGPA_allBranch(yearentry)
+					values,val,highs = getCGPA_allBranch(yearentry)
 					flash (' '.join(val[len(val)-3]))
 					return render_template("cgpa.html", values=values)
 				else:
@@ -233,24 +236,38 @@ def index():
 
 @app.route("/cgpa/branch",methods=["GET"])
 def cgpa_branchwise(year=16, branch="EC"):
+	if request.args.get('year'):
+		year=request.args.get('year')
+	if request.args.get('branch'):
+		branch=request.args.get('branch')
 	values, highs = getCGPA_branchwiseValues(year, branch)
 	flash (' '.join(highs))
 	return render_template("cgpa.html", values=values)
 
 @app.route("/cgpa",methods=["GET"])
 def cgpa_dist():
-	values = getCGPA_allBranch(year =16)
+	year=16
+	if request.args.get('year'):
+		year=request.args.get('year')
+	values,val,highs = getCGPA_allBranch(year)
 	flash (' '.join(val[len(val)-3]))
 	return render_template("cgpa.html", values=values)
 
 @app.route("/sgpa",methods=["GET"])
 def sgpa_dist():
-	values,val = getSGPA_allBranch(year = 2016)
+	year=16
+	if request.args.get('year'):
+		year=request.args.get('year')
+	values,val = getSGPA_allBranch(year)
 	flash (' '.join(val[len(val)-3]))
 	return render_template("sgpa.html", values=values)
 
 @app.route("/sgpa/branch",methods=["GET"])
-def sgpa_branchwise(year = 16, branch="EC"):
+def sgpa_branchwise(year=16, branch="EC"):
+	if request.args.get('year'):
+		year=request.args.get('year')
+	if request.args.get('branch'):
+		branch=request.args.get('branch')
 	values,highs = getSGPA_branchwiseValues(year,branch)
 	flash (' '.join(highs))
 	return render_template("sgpa.html", values=values)
@@ -261,6 +278,8 @@ def subject():
 	a)Some argument is missing in the get request
 	b)Invalid subcode"""
 	sub="ID1T001"
+	if request.args.get("sub"):
+		sub=request.args.get("sub")
 	scripts=[]
 	divs=[]
 	x=get_subject(sub)

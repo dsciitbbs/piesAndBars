@@ -4,6 +4,9 @@ To use, first clone the project then run **pip3 install -r requirements.txt**</b
 Use command **export FLASK_APP=application.py** to set the environment variable and then use **flask run**</br>
 
 **URLs:**</br>
+
+*localhost:5000/: - Form interface for the various result distributions available  
+
 *localhost:5000/cgpa* - Displays the CGPA distribution,batchwise. Required parameter: **year** </br>
 Example: localhost/cgpa?year=16</br>
 <p align="center">
