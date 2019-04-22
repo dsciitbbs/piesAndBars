@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 <html>
+<head>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.2.26/jquery.autocomplete.min.js"></script>
+</head>
+
+<!--Please fix it. Please-->
 
 <body>
     {% with messages = get_flashed_messages() %}
@@ -11,8 +17,29 @@
           </ul>
         {% endif %}
     {% endwith %}
-
-
+	<form action="/subject" method="post">
+        <div class="form-group">
+            <input autofocus class="form-control" id="autocomplete1" name="names" placeholder="Type a keyword..." type="text" required/>
+        </div>
+		<div id="k"></div>
+        <button class="btn btn-primary" type="submit">Quote</button>
+    </form>
+	<!--Names:<input type="text" name="names" id="autocomplete1"/>-->
+	<script>
+  $('#autocomplete1').autocomplete({
+      serviceUrl: '/names',
+      dataType: 'json',
+      onSearchComplete: function (query, suggestions) {
+        //console.log(query);
+		$('#k').html('');
+		for (var i = 0; i < suggestions.length; i++) {
+        console.log(suggestions[i]);
+        $('#k').append("</br>");
+		}
+      }
+  });
+</script>
+	
     <h2 style="text-align: center;">Pies&Bars</h2>
     <form action="" method="post" novalidate>
         <fieldset>
