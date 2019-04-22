@@ -1,5 +1,5 @@
 # piesAndBars
-[![Build Status](https://travis-ci.com/dsciitbbs/piesAndBars.svg?branch=master)](https://travis-ci.com/dsciitbbs/piesAndBars)  
+[![Build Status](https://travis-ci.com/dsciitbbs/piesAndBars.svg?branch=master)](https://travis-ci.com/dsciitbbs/piesAndBars)<img src="https://codecov.io/gh/dsciitbbs/piesAndBars/branch/master/graph/badge.svg">  
 
 An application to graphically represent the grade distribution in IIT Bhubaneswar over the past years.  
 To use, first clone the project then run **pip3 install -r requirements.txt**  
