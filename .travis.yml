@@ -7,5 +7,6 @@ install:
   - pip install -r requirements.txt
 script:
   - python application.py
+  - coverage run -m pytest
 after_success:
   - codecov
