@@ -1,4 +1,4 @@
-from flask import Flask, flash, redirect, render_template, request, session, url_for, send_file
+from flask import Flask, flash, redirect, render_template, request, session, url_for, send_file, jsonify
 from flask_session import Session
 from tempfile import mkdtemp
 from bokeh.embed import components
@@ -194,7 +194,6 @@ Session(app)
 @app.route("/", methods=['GET', 'POST'])
 def index():
 	form = FirstForm()
-
 	if request.method == 'POST':
 		if form.validate() == False:
 			flash('All fields are necessary')
@@ -272,14 +271,19 @@ def sgpa_branchwise(year=16, branch="EC"):
 	flash (' '.join(highs))
 	return render_template("sgpa.html", values=values)
 
-@app.route("/subject",methods=["GET"])
+@app.route("/subject",methods=["GET","POST"])
 def subject():
 	"""TODO: Implement error checking, display suitable messages if:
 	a)Some argument is missing in the get request
 	b)Invalid subcode"""
 	sub="ID1T001"
-	if request.args.get("sub"):
-		sub=request.args.get("sub")
+	if request.method=="GET":
+		if request.args.get("sub"):
+			sub=request.args.get("sub")
+	elif request.method=="POST":
+		if not request.form.get("names"):
+			return apology("Sorry, must provide subcode")
+		sub=request.form.get("names").split("-")[0]
 	scripts=[]
 	divs=[]
 	x=get_subject(sub)
@@ -296,3 +300,28 @@ def subject():
 		divs.append(div)
 	values = list(zip(scripts, divs))
 	return render_template('subject.html',values=values)
+
+@app.route("/<string:box>")
+def process(box):
+	query = request.args.get('query')
+	if query is not None:
+		query=query.lower()
+		suggestions = [{'label': 'mathematics first_year maths','value': 'MA1L001-Mathematics 1'}, {'label': 'jim','value': 'jim'}]
+		'''TODO: Add keywords in label to describe the subject and set value to subject code
+		by replacing the second entry with something like first entry.
+		Link this field to subject table so that user can click to go to that page
+		Also maybe add subject name with suitable delimiter (say: MA1L001-Mathematics 1)
+		and parse it in File side. Currently delimiter is -'''
+		temp=[]
+		for val in suggestions:
+			#print(val)
+			k=val['label'].split(' ')
+			for i in k:
+				print(i)
+				if i.startswith(query):
+					temp.append(val)
+					break
+		suggestions=temp
+		return jsonify({"suggestions":suggestions})
+	else:
+		return jsonify({"suggestions":[{}]})
