@@ -4,3 +4,5 @@ Flask-Session
 bokeh==1.1.0
 numpy
 Flask_WTF
+codecov
+pytest
