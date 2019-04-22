@@ -1,4 +1,4 @@
-from flask import Flask, flash, redirect, render_template, request, session, url_for, send_file, jsonify
+from flask import Flask, flash, redirect, render_template, request, session, url_for, send_file, jsonify, make_response
 from flask_session import Session
 from tempfile import mkdtemp
 from bokeh.embed import components
@@ -44,7 +44,7 @@ def getSGPA_allBranch(year = 16):
 			temp_SGPA.append(value[idx])
 			temp_roll.append(val[len(val)-2][idx])
 			temp_name.append(val[len(val)-1][idx])
-		if not temp_SGPA:
+		if not temp_SGPA or len(temp_SGPA)==0:
 			values = []
 			return values, val
 		m=max(temp_SGPA)
@@ -80,7 +80,7 @@ def getCGPA_allBranch(year=16):
 			temp_CGPA.append(value[idx])
 			temp_roll.append(val[len(val)-2][idx])
 			temp_name.append(val[len(val)-1][idx])
-		if not temp_CGPA:
+		if not temp_CGPA or len(temp_CGPA)==0:
 			values = []
 			return values, val
 		m=max(temp_CGPA)
@@ -119,7 +119,7 @@ def getCGPA_branchwiseValues(year=16, branch = "EC"):
 				temp_CGPA.append(value[idx])
 				temp_roll.append(val[len(val)-2][idx])
 				temp_name.append(val[len(val)-1][idx])
-		if not temp_CGPA:
+		if not temp_CGPA or len(temp_CGPA)==0:
 			values = []
 			highs=[]
 			return values, highs
@@ -158,6 +158,10 @@ def getSGPA_branchwiseValues(year=16, branch="EC"):
 				temp_SGPA.append(value[idx])
 				temp_roll.append(val[len(val)-2][idx])
 				temp_name.append(val[len(val)-1][idx])
+		if not temp_SGPA or len(temp_SGPA)==0:
+			values = []
+			highs=[]
+			return values, highs
 		m=max(temp_SGPA)
 		t=[i for i, j in enumerate(temp_SGPA) if j == m]
 		for v in t:
@@ -239,6 +243,8 @@ def cgpa_branchwise(year=16, branch="EC"):
 		year=request.args.get('year')
 	if request.args.get('branch'):
 		branch=request.args.get('branch')
+	if int(year) not in [14,16,17]:
+		return apology("Sorry, no data for that year");
 	values, highs = getCGPA_branchwiseValues(year, branch)
 	flash (' '.join(highs))
 	return render_template("cgpa.html", values=values)
@@ -248,6 +254,8 @@ def cgpa_dist():
 	year=16
 	if request.args.get('year'):
 		year=request.args.get('year')
+	if int(year) not in [14,16,17]:
+		return apology("Sorry, no data for that year");
 	values,val,highs = getCGPA_allBranch(year)
 	flash (' '.join(val[len(val)-3]))
 	return render_template("cgpa.html", values=values)
@@ -257,6 +265,8 @@ def sgpa_dist():
 	year=16
 	if request.args.get('year'):
 		year=request.args.get('year')
+	if int(year) not in [14,16,17]:
+		return apology("Sorry, no data for that year");
 	values,val = getSGPA_allBranch(year)
 	flash (' '.join(val[len(val)-3]))
 	return render_template("sgpa.html", values=values)
@@ -267,6 +277,8 @@ def sgpa_branchwise(year=16, branch="EC"):
 		year=request.args.get('year')
 	if request.args.get('branch'):
 		branch=request.args.get('branch')
+	if int(year) not in [14,16,17]:
+		return apology("Sorry, no data for that year");
 	values,highs = getSGPA_branchwiseValues(year,branch)
 	flash (' '.join(highs))
 	return render_template("sgpa.html", values=values)
@@ -299,6 +311,8 @@ def subject():
 		scripts.append(script)
 		divs.append(div)
 	values = list(zip(scripts, divs))
+	#r = make_response(render_template('subject.html',values=values))
+	#print(r.data)
 	return render_template('subject.html',values=values)
 
 @app.route("/<string:box>")
