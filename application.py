@@ -201,7 +201,7 @@ def index():
 		else:
 			yearentry = form.year.data
 			branchentry = form.branch.data
-			formatentry = form.branch.data
+			formatentry = form.format.data
 			if yearentry == "14" and branchentry =="EC":
 				print("ECE 14");
 				flash('ECE branch does not exist in year 14')
