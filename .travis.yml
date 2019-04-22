@@ -5,8 +5,5 @@ python:
   - "3.6"
 install:
   - pip install -r requirements.txt
-before_script:
-  - export FLASK_APP="application.py"
-  - export FLASK_DEBUG=1
 script:
-  - flask test
+  - python application.py
