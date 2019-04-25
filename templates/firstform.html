@@ -4,10 +4,20 @@
  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.2.26/jquery.autocomplete.min.js"></script>
 </head>
-
+<style>
+p{
+text-align:center
+}
+ul
+{
+margin:0 auto;
+width:11.8%;
+}
+</style>
 <!--Please fix it. Please-->
 
-<body>
+<body style="background-color:#BBBBBB">
+<div style="width:60%; height:700px;">
     {% with messages = get_flashed_messages() %}
         {% if messages %}
           <ul class=flashes>
@@ -17,12 +27,14 @@
           </ul>
         {% endif %}
     {% endwith %}
+	<h2 style="text-align: center;">Pies&Bars</h2>
 	<form action="/subject" method="post">
-        <div class="form-group">
-            <input autofocus class="form-control" id="autocomplete1" name="names" placeholder="Type a keyword..." type="text" required/>
+        <div  class="form-group centered" style="margin:0 auto; width:15%">
+            <input autofocus class="form-control" id="autocomplete1" name="names" placeholder="Type a keyword, such as maths..." type="text" required
+			style="text-align:center;float:center; width: 210px;"/>
         </div>
-		<div id="k"></div>
-        <button class="btn btn-primary" type="submit">Quote</button>
+		<div id="k" class="form-group centered" style="margin:0 auto; width:15%"></div>
+        <button class="btn btn-primary" style="margin-left: 42.8%;width: 15%;" type="submit">Show the subject!</button>
     </form>
 	<!--Names:<input type="text" name="names" id="autocomplete1"/>-->
 	<script>
@@ -39,29 +51,31 @@
       }
   });
 </script>
-	
-    <h2 style="text-align: center;">Pies&Bars</h2>
+	<h1 style="text-align:center">
+	Or, if you would like to see bulk data,
+	</br> Fill the form below
+	</h1>
     <form action="" method="post" novalidate>
         <fieldset>
-            <legend>Pies&Bars</legend>
+            <legend style="text-align:center">Pies&Bars</legend>
         {{ form.hidden_tag() }}
 
         <div style= font-size:20px; font-weight:bold; margin-left:150px;>
-        <p>
+        <p style="">
             Choose a year <br>
             {{ form.year }}<br>
             {% for error in form.year.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
-        </p>
-        <p>
+        </p >
+        <p style="">
             Choose a branch <br>
             {{ form.branch }}<br>
             {% for error in form.branch.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
-        <p>
+        <p >
             What would you like to visualise?<br>
             {{ form.format }}<br>
             {% for error in form.format.errors %}
@@ -73,5 +87,6 @@
     </div>
     </fieldset>
     </form>
+	</div>
 </body>
 </html>
