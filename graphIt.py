@@ -11,7 +11,9 @@ def sanitize(vals):
 		elif len(val)==0:
 			vals[idx]='CGPA:0.0'
 
-def fill(rolls,last_index,branches,r):
+#Run below sections only if scraping needed
+
+'''def fill(rolls,last_index,branches,r):
 	i=1
 	while i<46:
 		if len(str(i))<2:
@@ -63,7 +65,7 @@ def res(rolls,branches,r,last_index):
 		else:
 			print("]");
 		i=i+1
-	print("}")
+	print("}")'''
 
 '''def get_CGPA(year):
 	name=[]
@@ -229,7 +231,8 @@ def get_CGPA(year):
 			s7.append('CGPA:'+str(p[6]))
 			s8.append('CGPA:'+str(p[7]))
 	elif int(year)==15:
-		for key,value in r.items():
+		pass#Currently no data exists
+		'''for key,value in r.items():
 			p=r[key]["cgpa"]
 			if int(key[0:2])!=int(year):
 				continue
@@ -243,7 +246,7 @@ def get_CGPA(year):
 			s4.append('CGPA:'+str(p[3]))
 			s5.append('CGPA:'+str(p[4]))
 			s6.append('CGPA:'+str(p[5]))
-			s7.append('CGPA:'+str(p[6]))
+			s7.append('CGPA:'+str(p[6]))'''
 	elif int(year)==16:
 		for key,value in r.items():
 			p=r[key]["cgpa"]

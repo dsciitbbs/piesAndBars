@@ -7,6 +7,7 @@ from graphIt import get_CGPA
 from SGPA import get_SGPA
 from subject import get_subject
 import numpy as np
+import json
 from forms import FirstForm
 
 app = Flask(__name__)
@@ -194,6 +195,11 @@ app.config["SESSION_TYPE"] = "filesystem"
 app.config['SECRET_KEY'] = 'you-will-never-guess'
 Session(app)
 
+with open('subject_list.json') as f:
+	text=f.read()
+	r=json.loads(text)
+suggestions=r["values"]
+
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
@@ -315,12 +321,15 @@ def subject():
 	#print(r.data)
 	return render_template('subject.html',values=values)
 
+
 @app.route("/<string:box>")
 def process(box):
 	query = request.args.get('query')
 	if query is not None:
 		query=query.lower()
-		suggestions = [{'label': 'mathematics first_year maths','value': 'MA1L001-Mathematics 1'}, {'label': 'jim','value': 'jim'}]
+		print(query)
+		global suggestions
+		#suggestions = [{'label': 'mathematics first_year maths','value': 'MA1L001-Mathematics 1'}, {'label': 'jim','value': 'jim'}]
 		'''TODO: Add keywords in label to describe the subject and set value to subject code
 		by replacing the second entry with something like first entry.
 		Link this field to subject table so that user can click to go to that page
@@ -332,10 +341,10 @@ def process(box):
 			k=val['label'].split(' ')
 			for i in k:
 				print(i)
-				if i.startswith(query):
+				if i.lower().startswith(query):
 					temp.append(val)
 					break
-		suggestions=temp
-		return jsonify({"suggestions":suggestions})
+		k=temp
+		return jsonify({"suggestions":k})
 	else:
 		return jsonify({"suggestions":[{}]})

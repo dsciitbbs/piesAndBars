@@ -33,7 +33,8 @@ def get_SGPA(year):
 			s7.append('SGPA:'+str(p[6]))
 			s8.append('SGPA:'+str(p[7]))
 	elif int(year)==15:
-		for key,value in r.items():
+		pass#No data exists yet
+		'''for key,value in r.items():
 			p=r[key]["sgpa"]
 			if int(key[0:2])!=int(year):
 				continue
@@ -47,7 +48,7 @@ def get_SGPA(year):
 			s4.append('SGPA:'+str(p[3]))
 			s5.append('SGPA:'+str(p[4]))
 			s6.append('SGPA:'+str(p[5]))
-			s7.append('SGPA:'+str(p[6]))
+			s7.append('SGPA:'+str(p[6]))'''
 	elif int(year)==16:
 		for key,value in r.items():
 			p=r[key]["sgpa"]

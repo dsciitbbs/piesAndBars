@@ -28,7 +28,11 @@ def runner(app):
 def test_index(client):
 	rv=client.post("/",data=dict(),follow_redirects=True)
 	assert b"All fields are necessary" in rv.data
-	#rv=client.post("/",data=dict(year=16,branch='EC',format='SGPA'),follow_redirects=True)
-	#assert b'&ltimg&gt' in rv.data
+	rv=client.post("/",data=dict(year=14,branch='EC',format='SGPA'),follow_redirects=True)
+	assert rv.status_code==200
+	rv=client.post("/",data=dict(year=14,branch='ALL',format='C'),follow_redirects=True)
+	assert rv.status_code==200
+	rv=client.post("/",data=dict(year=14,branch='ALL',format='S'),follow_redirects=True)
+	assert rv.status_code==200
 	rv=client.get("/")
 	assert b'Quote' and b'See Results' in rv.data

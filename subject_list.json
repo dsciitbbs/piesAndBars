@@ -1,0 +1,258 @@
+{
+	"data": "1",
+	"values": [{
+			"label": "mathematics first_year maths",
+			"value": "MA1L001-Mathematics 1"
+		}, {
+			"label": "dummy",
+			"value": "dummy"
+		},
+		{
+			"label": "introduction to electronics",
+			"value": "EC2L001-Introduction to Electronics"
+		},
+		{
+			"label": "introduction to material science and engineering",
+			"value": "ID2L001-Introduction to Material Science and Engineering"
+		},
+		{
+			"label": "introduction to Bioscience and Technology",
+			"value": "ID2L002-Introduction to Bioscience and Technology"
+		},
+		{
+			"label": "discrete structures",
+			"value": "CS2L001-Discrete Structures"
+		},
+		{
+			"label": "Signals and Systems",
+			"value": "EC2L002-Signals and Systems"
+		},
+		{
+			"label": "Introduction to Electronics Laboratory",
+			"value": "EC2P001-Introduction to Electronics Laboratory"
+		},
+		{
+			"label": "Signals and Systems Laboratory",
+			"value": "EC2P002-Signals and Systems Laboratory"
+		},
+		{
+			"label": "Project Seminar",
+			"value": "EE2S001-Project Seminar"
+		},
+		{
+			"label": "Environmental Science Technology and Management",
+			"value": "ID2L003-Environmental Science Technology and Management"
+		},
+		{
+			"label": "Combinatorics, Probability and Statistics (Mathematics VI) ",
+			"value": "MA2L006-Combinatorics, Probability and Statistics (Mathematics VI) "
+		},
+		{
+			"label": "Design and Analysis of Algorithms",
+			"value": "CS2L002-Design and Analysis of Algorithms"
+		},
+		{
+			"label": "Digital Electronics Circuits",
+			"value": "EC2L004-Digital Electronics Circuits"
+		},
+		{
+			"label": "Design and Analysis of Algorithms Laboratory",
+			"value": "CS2P001-Design and Analysis of Algorithms Laboratory"
+		},
+		{
+			"label": "Digital Electronics Circuits Laboratory",
+			"value": "EC2P004-Digital Electronics Circuits Laboratory"
+		},
+		{
+			"label": "Formal Languages and Automata Theory",
+			"value": "CS3L001-Formal Languages and Automata Theory"
+		},
+		{
+			"label": "Computer Organization and Architecture",
+			"value": "CS3L002-Computer Organization and Architecture"
+		},
+		{
+			"label": "Database Systems",
+			"value": "CS3L003-Database Systems"
+		},
+		{
+			"label": "Computer Organization and Architecture Laboratory",
+			"value": "CS3P001-Computer Organization and Architecture Laboratory"
+		},
+		{
+			"label": "Database Systems Laboratory",
+			"value": "CS3P002-Database Systems Laboratory"
+		},
+		{
+			"label": "Operating Systems",
+			"value": "CS3L005-Operating Systems"
+		},
+		{
+			"label": "Computer Networks",
+			"value": "CS3L006-Computer Networks"
+		},
+		{
+			"label": "Operating Systems Laboratory",
+			"value": "CS3P003-Operating Systems Laboratory"
+		},
+		{
+			"label": "Computer Networks Laboratory",
+			"value": "CS3P004-Computer Networks Laboratory"
+		},
+		{
+			"label": "Compiler Design",
+			"value": "CS4L001-Compiler Design"
+		},
+		{
+			"label": "Compiler Design Laboratory",
+			"value": "CS4P001-Compiler Design Laboratory"
+		},
+		{
+			"label": "Industrial Training Defense",
+			"value": "CS4T001-Industrial Training Defense"
+		},
+		{
+			"label": "Project- Part 1",
+			"value": "CS4D001-Project- Part 1"
+		},
+		{
+			"label": "Project-Part 2",
+			"value": "CS4D002-Project-Part 2"
+		},
+		{
+			"label": "Software Reliability",
+			"value": "CS6L003-Software Reliability"
+		},
+		{
+			"label": "VLSI Design",
+			"value": "EC4L003-VLSI Design"
+		},
+		{
+			"label": "Object Oriented System Design",
+			"value": "CS4L002-Object Oriented System Design"
+		},
+		{
+			"label": "Artificial Intelligence",
+			"value": "CS4L003-Artificial Intelligence"
+		},
+		{
+			"label": "Modeling and  Simulation",
+			"value": "CS4L004-Modeling and  Simulation"
+		},
+		{
+			"label": "Digital Communication",
+			"value": "EC4L006-Digital Communication"
+		},
+		{
+			"label": "Mobile Computing",
+			"value": "EC4L007-Mobile Computing"
+		},
+		{
+			"label": "Applied Graph Theory",
+			"value": "CS4L005-Applied Graph Theory"
+		},
+		{
+			"label": "Theory of Computation ",
+			"value": "CS4L006-Theory of Computation "
+		},
+		{
+			"label": "Principles of Programming Languages",
+			"value": "CS4L007-Principles of Programming Languages"
+		},
+		{
+			"label": "Computational Geometry",
+			"value": "CS4L008-Computational Geometry"
+		},
+		{
+			"label": "Image and  Video Processing",
+			"value": "EC6L002-Image and  Video Processing"
+		},
+		{
+			"label": "Computational Intelligence",
+			"value": "CS6L001-Computational Intelligence"
+		},
+		{
+			"label": "Data Analytics",
+			"value": "ID6L001-Data Analytics"
+		},
+		{
+			"label": "Communication Network",
+			"value": "EC6L010-Communication Network"
+		},
+		{
+			"label": "Natural Language Processing",
+			"value": "EC4L004-Natural Language Processing"
+		},
+		{
+			"label": "Embedded Systems",
+			"value": "EC4L008-Embedded Systems"
+		},
+		{
+			"label": "Software Engineering",
+			"value": "CS4L009-Software Engineering"
+		},
+		{
+			"label": "Computer Graphics",
+			"value": "CS4L010-Computer Graphics"
+		},
+		{
+			"label": "Computational Complexity",
+			"value": "CS4L011-Computational Complexity"
+		},
+		{
+			"label": "Datamining",
+			"value": "CS4L012-Datamining"
+		},
+		{
+			"label": "Advanced Computer    Architecture",
+			"value": "CS4L013-Advanced Computer    Architecture"
+		},
+		{
+			"label": "Dependable Computing",
+			"value": "CS4L014-Dependable Computing"
+		},
+		{
+			"label": "Symbolic Logic and Automated    Reasoning",
+			"value": "CS4L015-Symbolic Logic and Automated    Reasoning"
+		},
+		{
+			"label": "Parallel Algorithms",
+			"value": "CS4L016-Parallel Algorithms"
+		},
+		{
+			"label": "Robotics",
+			"value": "CS4L017-Robotics"
+		},
+		{
+			"label": "Sensor Networks",
+			"value": "EC6L032 -Sensor Networks "
+		}, {
+			"label": "Fault Tolerant Systems",
+			"value": "CSA4023-Fault Tolerant Systems"
+		},
+		{
+			"label": "Networks and Systems Security",
+			"value": "CS6L002-Networks and Systems Security"
+		},
+		{
+			"label": "Digital Signal Processing",
+			"value": "EC3L003-Digital Signal Processing"
+		},
+		{
+			"label": "Cloud Computing",
+			"value": "CS4L018-Cloud Computing"
+		},
+		{
+			"label": "High Performance Computing",
+			"value": "CS4L019-High Performance Computing"
+		},
+		{
+			"label": "Interconnection Networks",
+			"value": "EC4L010-Interconnection Networks"
+		},
+		{
+			"label": "introduction to electronics third semester manikandan",
+			"value": "EC2L001-Introduction to ELectronics"
+		}
+	]
+}
