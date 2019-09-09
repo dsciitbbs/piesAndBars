@@ -5,7 +5,7 @@ An application to graphically represent the grade distribution in IIT Bhubaneswa
 
 **Usage:**
 - Clone the project
-- Run *pip3 install -r requirements.txt**
+- Run *pip3 install -r requirements.txt*
 - Use command *export FLASK_APP=application.py* (on Mac/Linux) or *set FLASK_APP=application.py* to set the environment variable
 - Use *flask run*  (Windows/Linux) or *python -m flask run* (Mac)
 
