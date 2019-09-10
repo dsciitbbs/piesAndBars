@@ -90,4 +90,7 @@ def obfuscate(policy):
 		json.dump(data,f)
 
 if __name__ == '__main__':
+	if(len(sys.argv)<2 or (sys.argv[1]!="General" and sys.argv[1]!="Fernet")):
+		print("invalid")
+		exit()
 	obfuscate(sys.argv[1])
