@@ -52,3 +52,6 @@ docs/_build/
 
 # macOS
 .DS_Store
+
+# KEYS
+Keys.json
